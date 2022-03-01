@@ -9,6 +9,12 @@
 
 (def notion-database-id (env :NOTION_DB))
 
+(def new-entry {:parent notion-database-id
+                :properties {:Date [{:type "rich_text"
+                                     :rich_text {:content "The title"}}]}})
+
+(get-in new-entry [:properties :Date 0 :type])
+
 (defn db-query-url [] (str/replace "https://api.notion.com/v1/databases/:db_id/query" #":db_id" notion-database-id))
 
 (def notion-page {:parent {:type "page_id"
